@@ -22,8 +22,8 @@ describe 'jira' do
             it { is_expected.to compile.with_all_deps }
 
             it do
-              is_expected.to contain_exec('stop-jira-for-version-change').
-                with_command('systemctl stop jira.service && sleep 15')
+              is_expected.to contain_exec('stop-jira-for-version-change')
+                .with_command('systemctl stop jira.service && sleep 15')
             end
           end
 
@@ -31,7 +31,7 @@ describe 'jira' do
             let(:params) do
               {
                 javahome: '/opt/java',
-                stop_jira: 'stop service please'
+                stop_jira: 'stop service please',
               }
             end
             let(:facts) do
@@ -39,8 +39,8 @@ describe 'jira' do
             end
 
             it do
-              is_expected.to contain_exec('stop-jira-for-version-change').
-                with_command('stop service please')
+              is_expected.to contain_exec('stop-jira-for-version-change')
+                .with_command('stop service please')
             end
           end
         end

@@ -11,7 +11,7 @@ describe 'jira' do
       {
         javahome: '/opt/java',
         version: '8.13.5',
-        enable_sso: true
+        enable_sso: true,
       }
     end
 
@@ -31,13 +31,13 @@ describe 'jira' do
           context 'with param application_name set to appname' do
             let(:params) do
               super().merge(
-                application_name: 'appname'
+                application_name: 'appname',
               )
             end
 
             it do
-              is_expected.to contain_file(PATH_CROWD_PROPS).
-                with_content(%r{application.name                        appname})
+              is_expected.to contain_file(PATH_CROWD_PROPS)
+                .with_content(%r{application.name                        appname})
             end
           end
 
@@ -48,19 +48,19 @@ describe 'jira' do
                 application_password: 'password',
                 application_login_url: 'https://login.url/',
                 crowd_server_url: 'https://crowd.url/',
-                crowd_base_url: 'http://crowdbase.url'
+                crowd_base_url: 'http://crowdbase.url',
               )
             end
 
             it { is_expected.to contain_file(PATH_CROWD_PROPS) }
 
             it do
-              is_expected.to contain_file(PATH_CROWD_PROPS).
-                with_content(%r{application.name                        app}).
-                with_content(%r{application.password                    password}).
-                with_content(%r{application.login.url                   https://login.url/}).
-                with_content(%r{crowd.server.url                        https://crowd.url/}).
-                with_content(%r{crowd.base.url                          http://crowdbase.url})
+              is_expected.to contain_file(PATH_CROWD_PROPS)
+                .with_content(%r{application.name                        app})
+                .with_content(%r{application.password                    password})
+                .with_content(%r{application.login.url                   https://login.url/})
+                .with_content(%r{crowd.server.url                        https://crowd.url/})
+                .with_content(%r{crowd.base.url                          http://crowdbase.url})
             end
           end
         end

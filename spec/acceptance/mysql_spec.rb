@@ -90,13 +90,13 @@ describe 'jira mysql' do
   end
 
   specify do
-    expect(command('wget -q --tries=24 --retry-connrefused --no-check-certificate --read-timeout=10 -O- localhost:8081')).
-      to have_attributes(stdout: %r{8.13.5})
+    expect(command('wget -q --tries=24 --retry-connrefused --no-check-certificate --read-timeout=10 -O- localhost:8081'))
+      .to have_attributes(stdout: %r{8.13.5})
   end
 
   specify do
-    expect(command('wget -q --tries=24 --retry-connrefused --no-check-certificate --read-timeout=10 -O- https://localhost:8443')).
-      to have_attributes(stdout: %r{8.13.5})
+    expect(command('wget -q --tries=24 --retry-connrefused --no-check-certificate --read-timeout=10 -O- https://localhost:8443'))
+      .to have_attributes(stdout: %r{8.13.5})
   end
 
   describe 'shutdown' do

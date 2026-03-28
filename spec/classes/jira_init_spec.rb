@@ -13,7 +13,7 @@ describe 'jira' do
 
           let :params do
             {
-              javahome: '/tmp/bla'
+              javahome: '/tmp/bla',
             }
           end
 

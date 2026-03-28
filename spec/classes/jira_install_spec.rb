@@ -12,7 +12,7 @@ describe 'jira' do
         javahome: PATH_JAVA_HOME,
         installdir: PATH_JIRA_DIR,
         version: DEFAULT_VERSION,
-        product: 'jira'
+        product: 'jira',
       }
     end
 
@@ -29,7 +29,7 @@ describe 'jira' do
                 user: 'jira',
                 group: 'jira',
                 homedir: '/home/jira',
-                download_url: DOWNLOAD_URL
+                download_url: DOWNLOAD_URL,
               )
             end
 
@@ -38,13 +38,13 @@ describe 'jira' do
             it { is_expected.to contain_user('jira').with_shell('/bin/true') }
 
             it "deploys jira #{DEFAULT_VERSION} from tar.gz" do
-              is_expected.to contain_archive("/tmp/#{PRODUCT_VERSION_STRING}.tar.gz").
-                with('extract_path' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone",
-                     'source' => "#{DOWNLOAD_URL}/#{PRODUCT_VERSION_STRING}.tar.gz",
-                     'creates' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone/conf",
-                     'user' => 'jira',
-                     'group' => 'jira',
-                     'checksum_type' => 'md5')
+              is_expected.to contain_archive("/tmp/#{PRODUCT_VERSION_STRING}.tar.gz")
+                .with('extract_path' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone",
+                      'source' => "#{DOWNLOAD_URL}/#{PRODUCT_VERSION_STRING}.tar.gz",
+                      'creates' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone/conf",
+                      'user' => 'jira',
+                      'group' => 'jira',
+                      'checksum_type' => 'md5')
             end
 
             it 'manages the jira home directory' do
@@ -58,18 +58,18 @@ describe 'jira' do
             context 'default product' do
               let(:params) do
                 super().merge(
-                  download_url: DOWNLOAD_URL
+                  download_url: DOWNLOAD_URL,
                 )
               end
 
               it "deploys jira #{DEFAULT_VERSION} from tar.gz" do
-                is_expected.to contain_archive("/tmp/#{PRODUCT_VERSION_STRING}.tar.gz").
-                  with('extract_path' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone",
-                       'source' => "#{DOWNLOAD_URL}/#{PRODUCT_VERSION_STRING}.tar.gz",
-                       'creates' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone/conf",
-                       'user' => 'jira',
-                       'group' => 'jira',
-                       'checksum_type' => 'md5')
+                is_expected.to contain_archive("/tmp/#{PRODUCT_VERSION_STRING}.tar.gz")
+                  .with('extract_path' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone",
+                        'source' => "#{DOWNLOAD_URL}/#{PRODUCT_VERSION_STRING}.tar.gz",
+                        'creates' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone/conf",
+                        'user' => 'jira',
+                        'group' => 'jira',
+                        'checksum_type' => 'md5')
               end
             end
 
@@ -77,18 +77,18 @@ describe 'jira' do
               let(:params) do
                 super().merge(
                   product: 'jira-core',
-                  download_url: DOWNLOAD_URL
+                  download_url: DOWNLOAD_URL,
                 )
               end
 
               it "deploys jira #{DEFAULT_VERSION} from tar.gz" do
-                is_expected.to contain_archive("/tmp/#{PRODUCT_VERSION_STRING_CORE}.tar.gz").
-                  with('extract_path' => "/opt/jira/#{PRODUCT_VERSION_STRING_CORE}-standalone",
-                       'source' => "#{DOWNLOAD_URL}/#{PRODUCT_VERSION_STRING_CORE}.tar.gz",
-                       'creates' => "/opt/jira/#{PRODUCT_VERSION_STRING_CORE}-standalone/conf",
-                       'user' => 'jira',
-                       'group' => 'jira',
-                       'checksum_type' => 'md5')
+                is_expected.to contain_archive("/tmp/#{PRODUCT_VERSION_STRING_CORE}.tar.gz")
+                  .with('extract_path' => "/opt/jira/#{PRODUCT_VERSION_STRING_CORE}-standalone",
+                        'source' => "#{DOWNLOAD_URL}/#{PRODUCT_VERSION_STRING_CORE}.tar.gz",
+                        'creates' => "/opt/jira/#{PRODUCT_VERSION_STRING_CORE}-standalone/conf",
+                        'user' => 'jira',
+                        'group' => 'jira',
+                        'checksum_type' => 'md5')
               end
             end
           end
@@ -96,7 +96,7 @@ describe 'jira' do
           context 'manage_users => false' do
             let(:params) do
               super().merge(
-                manage_user: false
+                manage_user: false,
               )
             end
             let(:pre_condition) do
@@ -121,7 +121,7 @@ describe 'jira' do
                 uid: 333,
                 gid: 444,
                 shell: '/bin/bash',
-                download_url: DOWNLOAD_URL
+                download_url: DOWNLOAD_URL,
               )
             end
 
@@ -135,13 +135,13 @@ describe 'jira' do
             it { is_expected.to contain_group('bar') }
 
             it "deploys jira #{DEFAULT_VERSION} from tar.gz" do
-              is_expected.to contain_archive("/tmp/#{PRODUCT_VERSION_STRING}.tar.gz").
-                with('extract_path' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone",
-                     'source' => "#{DOWNLOAD_URL}/#{PRODUCT_VERSION_STRING}.tar.gz",
-                     'creates' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone/conf",
-                     'user' => 'foo',
-                     'group' => 'bar',
-                     'checksum_type' => 'md5')
+              is_expected.to contain_archive("/tmp/#{PRODUCT_VERSION_STRING}.tar.gz")
+                .with('extract_path' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone",
+                      'source' => "#{DOWNLOAD_URL}/#{PRODUCT_VERSION_STRING}.tar.gz",
+                      'creates' => "/opt/jira/#{PRODUCT_VERSION_STRING}-standalone/conf",
+                      'user' => 'foo',
+                      'group' => 'bar',
+                      'checksum_type' => 'md5')
             end
 
             it 'manages the jira home directory' do
