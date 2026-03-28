@@ -12,7 +12,7 @@ describe 'jira' do
       {
         javahome: PATH_JAVA_HOME,
         version: DEFAULT_VERSION,
-        db: 'mysql'
+        db: 'mysql',
       }
     end
 
@@ -26,7 +26,7 @@ describe 'jira' do
           context 'mysql connector defaults' do
             let(:params) do
               super().merge(
-                mysql_connector_version: '5.1.34'
+                mysql_connector_version: '5.1.34',
               )
             end
 
@@ -34,25 +34,25 @@ describe 'jira' do
             it { is_expected.to contain_file(PATH_MYSQL_CONNECTOR).with_ensure('directory') }
 
             it do
-              is_expected.to contain_file(PATH_MYSQL_CONNECTOR_LIB).
-                with(
+              is_expected.to contain_file(PATH_MYSQL_CONNECTOR_LIB)
+                .with(
                   'ensure' => 'link',
-                  'target' => "#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar"
+                  'target' => "#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar",
                 )
             end
 
             it 'deploys mysql connector 5.1.34 from tar.gz' do
-              is_expected.to contain_archive("#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-5.1.34.tar.gz").
-                with('source' => 'https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.34.tar.gz',
-                     'extract_path' => PATH_MYSQL_CONNECTOR,
-                     'creates' => "#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-5.1.34")
+              is_expected.to contain_archive("#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-5.1.34.tar.gz")
+                .with('source' => 'https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.34.tar.gz',
+                      'extract_path' => PATH_MYSQL_CONNECTOR,
+                      'creates' => "#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-5.1.34")
             end
           end
 
           context 'mysql connector defaults Connector Version >8' do
             let(:params) do
               super().merge(
-                mysql_connector_version: '8.0.23'
+                mysql_connector_version: '8.0.23',
               )
             end
 
@@ -60,18 +60,18 @@ describe 'jira' do
             it { is_expected.to contain_file(PATH_MYSQL_CONNECTOR).with_ensure('directory') }
 
             it do
-              is_expected.to contain_file(PATH_MYSQL_CONNECTOR_LIB).
-                with(
+              is_expected.to contain_file(PATH_MYSQL_CONNECTOR_LIB)
+                .with(
                   'ensure' => 'link',
-                  'target' => "#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-8.0.23/mysql-connector-java-8.0.23.jar"
+                  'target' => "#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-8.0.23/mysql-connector-java-8.0.23.jar",
                 )
             end
 
             it 'deploys mysql connector 8.0.23 from tar.gz' do
-              is_expected.to contain_archive('/opt/MySQL-connector/mysql-connector-java-8.0.23.tar.gz').
-                with('source' => 'https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.23.tar.gz',
-                     'extract_path' => PATH_MYSQL_CONNECTOR,
-                     'creates' => "#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-8.0.23")
+              is_expected.to contain_archive('/opt/MySQL-connector/mysql-connector-java-8.0.23.tar.gz')
+                .with('source' => 'https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.23.tar.gz',
+                      'extract_path' => PATH_MYSQL_CONNECTOR,
+                      'creates' => "#{PATH_MYSQL_CONNECTOR}/mysql-connector-java-8.0.23")
             end
           end
 
@@ -81,32 +81,32 @@ describe 'jira' do
                 mysql_connector_version: '5.1.15',
                 mysql_connector_format: 'zip',
                 mysql_connector_install: '/opt/foo',
-                mysql_connector_url: 'http://example.co.za/foo'
+                mysql_connector_url: 'http://example.co.za/foo',
               )
             end
 
             it { is_expected.to contain_file('/opt/foo').with_ensure('directory') }
 
             it do
-              is_expected.to contain_file(PATH_MYSQL_CONNECTOR_LIB).
-                with(
+              is_expected.to contain_file(PATH_MYSQL_CONNECTOR_LIB)
+                .with(
                   'ensure' => 'link',
-                  'target' => '/opt/foo/mysql-connector-java-5.1.15/mysql-connector-java-5.1.15-bin.jar'
+                  'target' => '/opt/foo/mysql-connector-java-5.1.15/mysql-connector-java-5.1.15-bin.jar',
                 )
             end
 
             it 'deploys mysql connector 5.1.15 from zip' do
-              is_expected.to contain_archive('/opt/foo/mysql-connector-java-5.1.15.zip').
-                with('source' => 'http://example.co.za/foo/mysql-connector-java-5.1.15.zip',
-                     'extract_path' => '/opt/foo',
-                     'creates' => '/opt/foo/mysql-connector-java-5.1.15')
+              is_expected.to contain_archive('/opt/foo/mysql-connector-java-5.1.15.zip')
+                .with('source' => 'http://example.co.za/foo/mysql-connector-java-5.1.15.zip',
+                      'extract_path' => '/opt/foo',
+                      'creates' => '/opt/foo/mysql-connector-java-5.1.15')
             end
           end
 
           context 'mysql_connector_mangage equals false' do
             let(:params) do
               super().merge(
-                mysql_connector_manage: false
+                mysql_connector_manage: false,
               )
             end
 
